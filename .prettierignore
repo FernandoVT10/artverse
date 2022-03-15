@@ -1,9 +1,9 @@
+# production
+server/build
+
 # testing
 /coverage
 
-# production
-/build
-
 # next.js
-/.next/
+**/.next/
 /out/

@@ -1,7 +1,16 @@
 {
-  "extends": ["next/core-web-vitals", "eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier"],
   "rules": {
     "quotes": ["error", "double"],
     "semi": ["error", "always"]
-  }
+  },
+  "overrides": [
+    {
+      "files": "client/**/*",
+      "extends": "next/core-web-vitals",
+      "rules": {
+        "@next/next/no-html-link-for-pages": ["error", "client/src/pages/"]
+      }
+    }
+  ]
 }
