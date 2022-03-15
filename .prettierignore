@@ -7,3 +7,6 @@ server/build
 # next.js
 **/.next/
 /out/
+
+# config files
+jest.config.js
