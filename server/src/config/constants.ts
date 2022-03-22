@@ -1,3 +1,4 @@
+import path from "path";
 import { config } from "dotenv";
 // set all variables from ".env" file in the "process.env"
 config();
@@ -19,3 +20,11 @@ export const DB_CONFIG: DBConfig = {
   databaseName: process.env.DB_NAME || "",
   port: dbPort,
 };
+
+const ROOT_DIR = path.resolve(__dirname, "../../../");
+
+export const LOGS_DIR = path.resolve(ROOT_DIR, "./logs/");
+// the path where our frontend is
+export const CLIENT_DIR = path.resolve(ROOT_DIR, "./client");
+// the path where our static files are
+export const PUBLIC_DIR = path.resolve(ROOT_DIR, "./public");
