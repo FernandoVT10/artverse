@@ -1,3 +1,6 @@
 {
-  "ignore": ["./client/*", "**/__tests__/**/*"]
+  "ignore": ["./client/*", "**/__tests__/**/*"],
+  "execMap": {
+    "ts": "ts-node --project ./server/tsconfig.json"
+  }
 }

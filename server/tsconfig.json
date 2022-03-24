@@ -1,8 +1,23 @@
 {
   "extends": "../tsconfig.json",
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    // here we could use "typescript-transform-paths/register" but for a weird reason
+    // it doesn't work, so meanwhile we're gonna use this one
+    "require": [ "tsconfig-paths/register" ]
+  },
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./build"
+    "outDir": "./build",
+    "baseUrl": "./src/",
+    "paths": {
+      "@config/*": ["config/*"]
+    },
+    "plugins": [
+      // this plugin is used to transform the tsconfig paths to relative paths
+      // that node can understand
+      { "transform": "typescript-transform-paths" }
+    ]
   },
   "include": ["./src/**/*"],
   "exclude": ["./**/__tests__/**/*"]
