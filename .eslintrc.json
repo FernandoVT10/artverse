@@ -17,6 +17,15 @@
       "rules": {
         "@next/next/no-html-link-for-pages": ["error", "client/src/pages/"]
       }
+    },
+    {
+      "files": [
+        "**/__tests__/**/*",
+        "server/src/test-utils/*"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
     }
   ]
 }

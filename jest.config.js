@@ -4,7 +4,12 @@ module.exports = {
       preset: "ts-jest",
       testEnvironment: "node",
       displayName: "server",
-      rootDir: "<rootDir>/server/"
+      rootDir: "<rootDir>/server/",
+      moduleNameMapper: {
+        "^@config/(.*)$": "<rootDir>/src/config/$1",
+        "^@utils/(.*)$": "<rootDir>/src/utils/$1",
+        "^@test-utils/(.*)$": "<rootDir>/src/test-utils/$1"
+      }
     },
     {
       preset: "ts-jest",

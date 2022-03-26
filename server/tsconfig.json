@@ -11,7 +11,9 @@
     "outDir": "./build",
     "baseUrl": "./src/",
     "paths": {
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@utils/*": ["utils/*"],
+      "@test-utils/*": ["test-utils/*"]
     },
     "plugins": [
       // this plugin is used to transform the tsconfig paths to relative paths
@@ -19,6 +21,5 @@
       { "transform": "typescript-transform-paths" }
     ]
   },
-  "include": ["./src/**/*"],
-  "exclude": ["./**/__tests__/**/*"]
+  "include": ["./src/**/*"]
 }
