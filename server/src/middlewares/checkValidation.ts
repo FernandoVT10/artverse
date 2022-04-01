@@ -1,7 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult, ValidationError } from "express-validator";
 
-export const errorFormater = ({ msg }: ValidationError) => msg;
+export const errorFormater = ({ msg, param }: ValidationError) => ({
+  message: msg,
+  field: param,
+});
 
 function checkValidation() {
   return (req: Request, res: Response, next: NextFunction) => {

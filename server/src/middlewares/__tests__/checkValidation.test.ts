@@ -8,14 +8,16 @@ jest.mock("express-validator");
 
 describe("middlewares/checkValidation", () => {
   describe("errorFormater", () => {
-    it("should return just the error message", () => {
+    it("should return just the message and the field(or param)", () => {
       const validationErrorObject = {
         msg: "test error message",
+        param: "test",
       } as any;
 
-      expect(errorFormater(validationErrorObject)).toBe(
-        validationErrorObject.msg
-      );
+      expect(errorFormater(validationErrorObject)).toEqual({
+        message: validationErrorObject.msg,
+        field: validationErrorObject.param,
+      });
     });
   });
 

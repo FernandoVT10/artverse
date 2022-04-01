@@ -6,7 +6,7 @@ import {
   DataTypes,
 } from "sequelize";
 
-import { sequelize } from "../../config/db";
+import { sequelize } from "@config/db";
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
@@ -33,8 +33,11 @@ User.init(
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING(1000),
+      type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
     avatar: DataTypes.STRING,
     password: {

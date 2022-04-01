@@ -1,18 +1,20 @@
-import path from "path";
 import express from "express";
 import next from "next";
+import bodyParser from "body-parser";
 
 import { sequelize } from "./config/db";
+import { CLIENT_DIR, PUBLIC_DIR } from "./config/constants";
+
+import logger from "./config/logger";
 
 import routes from "./routes";
 
-// this is the url where the client files are
-const clientDir = path.join(__dirname, "../../client");
-const dev = process.env.NODE_ENV !== "production";
 const port = 3000;
 
 const server = express();
-const nextApp = next({ dev, dir: clientDir });
+
+const dev = process.env.NODE_ENV !== "production";
+const nextApp = next({ dev, dir: CLIENT_DIR });
 const nextHandle = nextApp.getRequestHandler();
 
 (async function () {
@@ -21,10 +23,11 @@ const nextHandle = nextApp.getRequestHandler();
   try {
     await sequelize.authenticate();
   } catch (err) {
-    console.error("There was an error trying to connect to the database", err);
+    return logger.error(err);
   }
 
-  server.use(express.static(path.join(__dirname, "../../public")));
+  server.use(express.static(PUBLIC_DIR));
+  server.use(bodyParser.json());
 
   server.use(routes);
 
