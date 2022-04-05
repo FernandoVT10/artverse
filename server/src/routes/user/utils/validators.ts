@@ -30,5 +30,7 @@ export const password: ValidationChain = body(
   "password",
   "The password is required"
 )
+  .isString()
+  .withMessage("The password must be a string")
   .not()
   .isEmpty();

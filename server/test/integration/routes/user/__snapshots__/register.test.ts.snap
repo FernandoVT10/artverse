@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Integration routes/user/register validation email should return an error when the email already exists in the database 1`] = `
+Array [
+  Object {
+    "field": "email",
+    "message": "The email already exists",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation email should return an error when the email is invalid 1`] = `
+Array [
+  Object {
+    "field": "email",
+    "message": "The email is invalid",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation password should return an error when the password is empty 1`] = `
+Array [
+  Object {
+    "field": "password",
+    "message": "The password is required",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation password should return an error when the password is not a string 1`] = `
+Array [
+  Object {
+    "field": "password",
+    "message": "The password must be a string",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation username should return an error when the username already exists in the database 1`] = `
+Array [
+  Object {
+    "field": "username",
+    "message": "The username already exists",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation username should return an error when the username is larger than 30 characters 1`] = `
+Array [
+  Object {
+    "field": "username",
+    "message": "The username must have 4 or more characters",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation username should return an error when the username is not a string 1`] = `
+Array [
+  Object {
+    "field": "username",
+    "message": "The username must be a string",
+  },
+]
+`;
+
+exports[`Integration routes/user/register validation username should return an error when the username is shorter than 4 characters 1`] = `
+Array [
+  Object {
+    "field": "username",
+    "message": "The username must have 4 or more characters",
+  },
+]
+`;

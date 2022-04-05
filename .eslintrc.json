@@ -21,7 +21,7 @@
     {
       "files": [
         "**/__tests__/**/*",
-        "server/src/test-utils/*"
+        "**/test/**/*"
       ],
       "rules": {
         "@typescript-eslint/no-explicit-any": "off"

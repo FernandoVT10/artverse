@@ -14,7 +14,9 @@
       "@config/*": ["config/*"],
       "@utils/*": ["utils/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@test-utils/*": ["test-utils/*"]
+      "@app": ["app"],
+      "@routes/*": ["routes/*"],
+      "@test-utils/*": ["../test/utils/*"]
     },
     "plugins": [
       // this plugin is used to transform the tsconfig paths to relative paths
@@ -22,5 +24,5 @@
       { "transform": "typescript-transform-paths" }
     ]
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./test/**/*"]
 }

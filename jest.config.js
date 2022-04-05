@@ -9,7 +9,9 @@ module.exports = {
         "^@config/(.*)$": "<rootDir>/src/config/$1",
         "^@utils/(.*)$": "<rootDir>/src/utils/$1",
         "^@middlewares/(.*)$": "<rootDir>/src/middlewares/$1",
-        "^@test-utils/(.*)$": "<rootDir>/src/test-utils/$1"
+        "^@app$": "<rootDir>/src/app.ts",
+        "^@routes/(.*)$": "<rootDir>/src/routes/$1",
+        "^@test-utils/(.*)$": "<rootDir>/test/utils/$1"
       }
     },
     {
