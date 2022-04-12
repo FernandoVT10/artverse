@@ -7,9 +7,9 @@ import checkValidation from "@middlewares/checkValidation";
 
 export function validate(): RequestHandler[] {
   return [
-    validators.username,
-    validators.email,
-    validators.password,
+    validators.username(),
+    validators.email(),
+    validators.password(),
     checkValidation(),
   ];
 }

@@ -1,9 +1,9 @@
 import {
   checkIfUsernameIsAvailable,
   checkIfEmailIsAvailable,
-  checkIfUserExists,
+  checkIfUsernameOrEmailExists,
 } from "../validators";
-import { checkIfAFieldExists } from "../../repositories";
+import { checkIfUserExists } from "../../repositories";
 
 jest.mock("../../repositories");
 
@@ -13,73 +13,65 @@ describe("routes/user/utils/validators", () => {
   });
 
   describe("checkIfUsernameIsAvaiilable", () => {
-    const mockedCheckUsername = jest.mocked(checkIfAFieldExists.checkUsername);
+    const mockedCheckByUsername = jest.mocked(
+      checkIfUserExists.checkByUsername
+    );
 
-    it("shouldn't throw when 'checkUsername' returns false", async () => {
-      mockedCheckUsername.mockResolvedValueOnce(false);
-      await checkIfUsernameIsAvailable("");
-    });
-
-    it("should throw an error when 'checkUsername' returns true", async () => {
-      mockedCheckUsername.mockResolvedValueOnce(true);
+    it("should throw an error when 'checkByUsername' returns true", async () => {
+      mockedCheckByUsername.mockResolvedValueOnce(true);
 
       await expect(() => checkIfUsernameIsAvailable("")).rejects.toThrow();
     });
 
-    it("should throw call 'checkUsername' with the given username", async () => {
-      mockedCheckUsername.mockResolvedValueOnce(false);
+    it("should call 'checkByUsername' with the given username", async () => {
+      mockedCheckByUsername.mockResolvedValueOnce(false);
       const username = "test";
 
       await checkIfUsernameIsAvailable(username);
 
-      expect(mockedCheckUsername).toHaveBeenCalledWith(username);
+      expect(mockedCheckByUsername).toHaveBeenCalledWith(username);
     });
   });
 
   describe("checkIfEmailIsAvaiilable", () => {
-    const mockedCheckEmail = jest.mocked(checkIfAFieldExists.checkEmail);
+    const mockedCheckByEmail = jest.mocked(checkIfUserExists.checkByEmail);
 
-    it("shouldn't throw when 'checkEmail' returns false", async () => {
-      mockedCheckEmail.mockResolvedValueOnce(false);
-      await checkIfEmailIsAvailable("");
-    });
-
-    it("should throw an error when 'checkEmail' returns true", async () => {
-      mockedCheckEmail.mockResolvedValueOnce(true);
+    it("should throw an error when 'checkByEmail' returns true", async () => {
+      mockedCheckByEmail.mockResolvedValueOnce(true);
 
       await expect(() => checkIfEmailIsAvailable("")).rejects.toThrow();
     });
 
-    it("should throw call 'checkEmail' with the given email", async () => {
-      mockedCheckEmail.mockResolvedValueOnce(false);
+    it("should call 'checkByEmail' with the given email", async () => {
+      mockedCheckByEmail.mockResolvedValueOnce(false);
       const email = "test";
 
       await checkIfEmailIsAvailable(email);
 
-      expect(mockedCheckEmail).toHaveBeenCalledWith(email);
+      expect(mockedCheckByEmail).toHaveBeenCalledWith(email);
     });
   });
 
-  describe("checkIfUserExists", () => {
-    const mockedCheckUsernameAndEmail = jest.mocked(
-      checkIfAFieldExists.checkUsernameAndEmail
+  describe("checkIfUsernameOrEmailExists", () => {
+    const mockedCheckByUsernameOrEmail = jest.mocked(
+      checkIfUserExists.checkByUsernameOrEmail
     );
 
-    it("shouldn't throw when 'checkUsernameAndEmail' returns true", async () => {
-      mockedCheckUsernameAndEmail.mockResolvedValueOnce(true);
+    it("should throw when 'checkByUsernameOrEmail' returns false", async () => {
+      mockedCheckByUsernameOrEmail.mockResolvedValueOnce(false);
 
-      const data = "foo";
-      await checkIfUserExists(data);
-
-      expect(mockedCheckUsernameAndEmail).toHaveBeenCalledWith(data);
-    });
-
-    it("should throw when 'checkUsernameAndEmail' returns false", async () => {
-      mockedCheckUsernameAndEmail.mockResolvedValueOnce(false);
-
-      await expect(() => checkIfUserExists("")).rejects.toThrowError(
+      await expect(() => checkIfUsernameOrEmailExists("")).rejects.toThrowError(
         "The username or email don't exist"
       );
+    });
+
+    it("should call 'checkByUsernameOrEmail' with the given data", async () => {
+      mockedCheckByUsernameOrEmail.mockResolvedValueOnce(true);
+      const data = "foo";
+
+      await checkIfUsernameOrEmailExists(data);
+
+      expect(mockedCheckByUsernameOrEmail).toHaveBeenCalledWith(data);
     });
   });
 });

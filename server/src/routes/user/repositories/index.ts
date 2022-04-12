@@ -1,2 +1,2 @@
 export { default as createUser } from "./createUser";
-export * as checkIfAFieldExists from "./checkIfAFieldExists";
+export * as checkIfUserExists from "./checkIfUserExists";

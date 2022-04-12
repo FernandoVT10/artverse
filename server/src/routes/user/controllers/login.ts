@@ -9,7 +9,7 @@ import checkValidation from "@middlewares/checkValidation";
 import generateJWT from "../utils/generateJWT";
 
 export function validate(): RequestHandler[] {
-  return [usernameOrEmail, password, checkValidation()];
+  return [usernameOrEmail(), password(), checkValidation()];
 }
 
 export async function controller(
