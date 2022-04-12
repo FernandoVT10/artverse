@@ -1,3 +1,5 @@
+import { Op } from "sequelize";
+
 import User from "../UserModel";
 
 type Field = "username" | "email";
@@ -19,4 +21,17 @@ export function checkUsername(username: string): Promise<boolean> {
 
 export function checkEmail(email: string): Promise<boolean> {
   return checkField("email", email);
+}
+
+export async function checkUsernameAndEmail(data: string): Promise<boolean> {
+  const count = await User.count({
+    where: {
+      [Op.or]: {
+        username: data,
+        email: data,
+      },
+    },
+  });
+
+  return count > 0;
 }

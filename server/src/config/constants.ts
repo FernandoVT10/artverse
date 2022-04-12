@@ -28,3 +28,5 @@ export const LOGS_DIR = path.resolve(ROOT_DIR, "./logs/");
 export const CLIENT_DIR = path.resolve(ROOT_DIR, "./client");
 // the path where our static files are
 export const PUBLIC_DIR = path.resolve(ROOT_DIR, "./public");
+
+export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "";

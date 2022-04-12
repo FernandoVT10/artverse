@@ -1,6 +1,7 @@
 import {
   checkIfUsernameIsAvailable,
   checkIfEmailIsAvailable,
+  checkIfUserExists,
 } from "../validators";
 import { checkIfAFieldExists } from "../../repositories";
 
@@ -56,6 +57,29 @@ describe("routes/user/utils/validators", () => {
       await checkIfEmailIsAvailable(email);
 
       expect(mockedCheckEmail).toHaveBeenCalledWith(email);
+    });
+  });
+
+  describe("checkIfUserExists", () => {
+    const mockedCheckUsernameAndEmail = jest.mocked(
+      checkIfAFieldExists.checkUsernameAndEmail
+    );
+
+    it("shouldn't throw when 'checkUsernameAndEmail' returns true", async () => {
+      mockedCheckUsernameAndEmail.mockResolvedValueOnce(true);
+
+      const data = "foo";
+      await checkIfUserExists(data);
+
+      expect(mockedCheckUsernameAndEmail).toHaveBeenCalledWith(data);
+    });
+
+    it("should throw when 'checkUsernameAndEmail' returns false", async () => {
+      mockedCheckUsernameAndEmail.mockResolvedValueOnce(false);
+
+      await expect(() => checkIfUserExists("")).rejects.toThrowError(
+        "The username or email don't exist"
+      );
     });
   });
 });
