@@ -2,7 +2,7 @@ import { body, ValidationChain } from "express-validator";
 
 import { checkIfUserExists } from "../repositories";
 
-export async function checkIfUsernameIsAvailable(username: string) {
+async function checkIfUsernameIsAvailable(username: string) {
   if (await checkIfUserExists.checkByUsername(username)) {
     throw new Error("The username already exists");
   }
@@ -16,7 +16,7 @@ export function username(): ValidationChain {
     .custom(checkIfUsernameIsAvailable);
 }
 
-export async function checkIfEmailIsAvailable(email: string) {
+async function checkIfEmailIsAvailable(email: string) {
   if (await checkIfUserExists.checkByEmail(email)) {
     throw new Error("The email already exists");
   }
