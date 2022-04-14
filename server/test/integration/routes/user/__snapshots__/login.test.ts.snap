@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Integration routes/user/login should return an error when the password is incorrect 1`] = `undefined`;
+
+exports[`Integration routes/user/login validation password field should return an error when the password is empty 1`] = `
+Array [
+  Object {
+    "field": "password",
+    "message": "The password is required",
+  },
+]
+`;
+
+exports[`Integration routes/user/login validation password field should return an error when the password is not a string 1`] = `
+Array [
+  Object {
+    "field": "password",
+    "message": "The password must be a string",
+  },
+]
+`;
+
+exports[`Integration routes/user/login validation usernameOrEmail field should return an error when the username or email don't exist 1`] = `
+Array [
+  Object {
+    "field": "usernameOrEmail",
+    "message": "The username or email don't exist",
+  },
+]
+`;

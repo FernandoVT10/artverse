@@ -1,72 +1,63 @@
-import "@test-utils/setupDB";
-
+import bcrypt from "bcrypt";
 import supertest from "supertest";
 import app from "@app";
 import User from "@routes/user/UserModel";
 
-import {
-  testUsernameValidation,
-  testEmailValidation,
-  testPasswordValidation,
-} from "./testValidators";
+import "@test-utils/setupDB";
 
-const request = supertest(app);
+import { testUsernameField, testEmailField, testPasswordField } from "./shared";
 
 describe("Integration routes/user/register", () => {
   beforeEach(async () => {
     await User.sync({ force: true });
   });
 
-  const data = {
+  const requestData = {
     username: "alex",
     email: "alex@example.com",
     password: "secret",
   };
 
+  const request = supertest(app);
   const requestAPI = () => request.post("/api/users/register/");
 
+  const requestAPIAndGetUser = async (requestData: any): Promise<User> => {
+    await requestAPI().send(requestData);
+
+    return (await User.findOne({
+      where: { username: requestData.username },
+    })) as User;
+  };
+
   it("should return a successful response", async () => {
-    const result = await requestAPI().send(data).expect(200);
+    const result = await requestAPI().send(requestData).expect(200);
 
     const { body } = result;
     expect(body.success).toBeTruthy();
   });
 
   it("should create the user in the database", async () => {
-    await requestAPI().send(data);
-
-    const user = await User.findOne({
-      where: { username: data.username },
-    });
+    const user = await requestAPIAndGetUser(requestData);
 
     expect(user).toMatchObject({
-      ...data,
-      password: expect.any(String),
+      username: requestData.username,
+      email: requestData.email,
     });
   });
 
+  it("should hash the user password", async () => {
+    const user = await requestAPIAndGetUser(requestData);
+
+    const hashedPassword = user.password as string;
+
+    expect(
+      await bcrypt.compare(requestData.password, hashedPassword)
+    ).toBeTruthy();
+  });
+
   describe("validation", () => {
-    describe("username", () => {
-      testUsernameValidation(requestAPI, {
-        email: "test@example.com",
-        password: "secret",
-      });
-    });
-
-    describe("email", () => {
-      testEmailValidation(requestAPI, {
-        username: "test",
-        email: "test@example.com",
-        password: "secret",
-      });
-    });
-
-    describe("password", () => {
-      testPasswordValidation(requestAPI, {
-        username: "test",
-        email: "test@example.com",
-        password: "secret",
-      });
-    });
+    testUsernameField(requestAPI, requestData);
+    testEmailField(requestAPI, requestData);
+    testPasswordField(requestAPI, requestData);
   });
 });

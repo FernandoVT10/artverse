@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Integration routes/user/register validation email should return an error when the email already exists in the database 1`] = `
+exports[`Integration routes/user/register validation email field should return an error when the email already exists in the database 1`] = `
 Array [
   Object {
     "field": "email",
@@ -9,7 +9,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation email should return an error when the email is invalid 1`] = `
+exports[`Integration routes/user/register validation email field should return an error when the email is invalid 1`] = `
 Array [
   Object {
     "field": "email",
@@ -18,7 +18,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation password should return an error when the password is empty 1`] = `
+exports[`Integration routes/user/register validation password field should return an error when the password is empty 1`] = `
 Array [
   Object {
     "field": "password",
@@ -27,7 +27,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation password should return an error when the password is not a string 1`] = `
+exports[`Integration routes/user/register validation password field should return an error when the password is not a string 1`] = `
 Array [
   Object {
     "field": "password",
@@ -36,7 +36,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation username should return an error when the username already exists in the database 1`] = `
+exports[`Integration routes/user/register validation username field should return an error when the username already exists in the database 1`] = `
 Array [
   Object {
     "field": "username",
@@ -45,7 +45,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation username should return an error when the username is larger than 30 characters 1`] = `
+exports[`Integration routes/user/register validation username field should return an error when the username is larger than 30 characters 1`] = `
 Array [
   Object {
     "field": "username",
@@ -54,7 +54,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation username should return an error when the username is not a string 1`] = `
+exports[`Integration routes/user/register validation username field should return an error when the username is not a string 1`] = `
 Array [
   Object {
     "field": "username",
@@ -63,7 +63,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/register validation username should return an error when the username is shorter than 4 characters 1`] = `
+exports[`Integration routes/user/register validation username field should return an error when the username is shorter than 4 characters 1`] = `
 Array [
   Object {
     "field": "username",

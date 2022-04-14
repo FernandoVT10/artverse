@@ -85,19 +85,6 @@ describe("routes/user/controllers/login", () => {
           data.usernameOrEmail
         );
       });
-
-      it("should call the 'next' function when 'getUserByEmailOrUsername' returns null", async () => {
-        mockedGetUserByEmailOrUsername.mockResolvedValueOnce(null);
-
-        const { next } = await callController();
-
-        expect(next).toHaveBeenCalledWith(
-          new ValidationError(
-            "The username or email don't exist",
-            "usernameOrEmail"
-          )
-        );
-      });
     });
 
     describe("bcrypt.compare", () => {

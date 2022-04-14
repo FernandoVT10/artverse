@@ -16,7 +16,8 @@
       "@middlewares/*": ["middlewares/*"],
       "@app": ["app"],
       "@routes/*": ["routes/*"],
-      "@test-utils/*": ["../test/utils/*"]
+      "@test-utils/*": ["../test/utils/*"],
+      "@test-utils/factories/*": ["../test/factories/*"]
     },
     "plugins": [
       // this plugin is used to transform the tsconfig paths to relative paths

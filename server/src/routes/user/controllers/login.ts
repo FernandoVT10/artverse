@@ -7,6 +7,7 @@ import { ValidationError } from "@utils/errors";
 import getUserByEmailOrUsername from "../repositories/getUserByEmailOrUsername";
 import checkValidation from "@middlewares/checkValidation";
 import generateJWT from "../utils/generateJWT";
+import User from "../UserModel";
 
 export function validate(): RequestHandler[] {
   return [usernameOrEmail(), password(), checkValidation()];
@@ -20,14 +21,7 @@ export async function controller(
   const { usernameOrEmail, password } = req.body;
 
   try {
-    const user = await getUserByEmailOrUsername(usernameOrEmail);
-
-    if (!user) {
-      throw new ValidationError(
-        "The username or email don't exist",
-        "usernameOrEmail"
-      );
-    }
+    const user = (await getUserByEmailOrUsername(usernameOrEmail)) as User;
 
     const { password: hashedPassword } = user;
 
