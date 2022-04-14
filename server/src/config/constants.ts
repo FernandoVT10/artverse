@@ -1,7 +1,10 @@
 import path from "path";
+import getEnvFile from "@utils/getEnvFile";
+
 import { config } from "dotenv";
-// set all variables from ".env" file in the "process.env"
-config();
+config({
+  path: getEnvFile(process.env.NODE_ENV),
+});
 
 type DBConfig = {
   host: string;
