@@ -2,6 +2,8 @@ import { testExpressValidator } from "@test-utils/expressValidatorHelpers";
 import { ValidationChain } from "express-validator";
 import { checkIfUserExists } from "../../repositories";
 
+import generateRandomText from "@test-utils/generateRandomText";
+
 import * as validators from "../validators";
 
 jest.mock("../../repositories");
@@ -35,7 +37,7 @@ describe("routes/user/utils/validators", () => {
 
     it("should return an error if it's larger than 30", async () => {
       await testUsername(
-        "1234567890123456789012345678901234567890",
+        generateRandomText(31),
         "The username must have 4 or more characters"
       );
     });
