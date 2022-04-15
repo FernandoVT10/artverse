@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`middlewares/checkValidation ServerError instance should call 'res.json' with a default error message when the ServerError message isn't given 1`] = `
+Array [
+  Object {
+    "message": "There was an error trying to process your request. Please try again later.",
+  },
+]
+`;
+
+exports[`middlewares/checkValidation should call 'res.json' with a default error message 1`] = `
+Array [
+  Object {
+    "message": "There was an error trying to process your request. Please try again later.",
+  },
+]
+`;
