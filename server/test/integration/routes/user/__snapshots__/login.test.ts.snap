@@ -1,8 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Integration routes/user/login should return an error when the password is incorrect 1`] = `undefined`;
+exports[`Integration POST /api/users/login should return an error when the password is incorrect 1`] = `
+Array [
+  Object {
+    "field": "password",
+    "message": "The password is incorrect",
+  },
+]
+`;
 
-exports[`Integration routes/user/login validation password field should return an error when the password is empty 1`] = `
+exports[`Integration POST /api/users/login validation password field should return an error when the password is empty 1`] = `
 Array [
   Object {
     "field": "password",
@@ -11,7 +18,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/login validation password field should return an error when the password is not a string 1`] = `
+exports[`Integration POST /api/users/login validation password field should return an error when the password is not a string 1`] = `
 Array [
   Object {
     "field": "password",
@@ -20,7 +27,7 @@ Array [
 ]
 `;
 
-exports[`Integration routes/user/login validation usernameOrEmail field should return an error when the username or email don't exist 1`] = `
+exports[`Integration POST /api/users/login validation usernameOrEmail field should return an error when the username or email don't exist 1`] = `
 Array [
   Object {
     "field": "usernameOrEmail",

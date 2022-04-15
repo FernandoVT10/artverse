@@ -10,7 +10,7 @@ import { testPasswordField } from "./shared";
 import { createUser } from "@test-utils/factories/userFactory";
 import { JWT_SECRET_KEY } from "@config/constants";
 
-describe("Integration routes/user/login", () => {
+describe("Integration POST /api/users/login", () => {
   let user: User;
 
   const usernameOrEmail = "foo-bar";
@@ -43,7 +43,6 @@ describe("Integration routes/user/login", () => {
   });
 
   it("should return an error when the password is incorrect", async () => {
-    // TODO this is gonna work when the express global error handler is added
     const res = await requestAPI()
       .send({
         usernameOrEmail: user.username,

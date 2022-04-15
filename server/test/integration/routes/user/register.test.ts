@@ -7,7 +7,7 @@ import "@test-utils/setupDB";
 
 import { testUsernameField, testEmailField, testPasswordField } from "./shared";
 
-describe("Integration routes/user/register", () => {
+describe("Integration POST /api/users/register", () => {
   beforeEach(async () => {
     await User.sync({ force: true });
   });

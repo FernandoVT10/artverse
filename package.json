@@ -8,9 +8,10 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "next build ./client",
     "build:server": "ttsc -p ./server/tsconfig.build.json",
-    "test": "npx jest",
-    "test:unit": "npm test -- --testPathIgnorePatterns=\".*/integration\"",
-    "test:coverage": "npx jest --coverage",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "npx jest --testPathIgnorePatterns=\".*/integration\"",
+    "test:integration": "npx jest --runInBand --testPathPattern=\".*/integration\"",
+    "test:coverage": "npm run test:unit -- --coverage && npm run test:integration -- --coverage",
     "lint": "eslint **/*.{js,ts,tsx}",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install"
