@@ -18,6 +18,7 @@ export default function (params?: Parameters): ExpressMocked {
   const res: any = {};
 
   res.json = jest.fn();
+  res.cookie = jest.fn(() => res);
   res.status = jest.fn(() => res);
 
   const next = jest.fn();

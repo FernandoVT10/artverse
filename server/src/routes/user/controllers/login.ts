@@ -9,6 +9,8 @@ import getUserByEmailOrUsername from "../repositories/getUserByEmailOrUsername";
 import checkValidation from "@middlewares/checkValidation";
 import generateJWT from "../utils/generateJWT";
 
+const EXPIRATION_IN_30_DAYS = 30 * 24 * 60 * 60 * 1000;
+
 export function validate(): RequestHandler[] {
   return [usernameOrEmail(), password(), checkValidation()];
 }
@@ -35,7 +37,13 @@ export async function controller(
 
     const token = generateJWT(payload);
 
-    return res.json(token);
+    return res
+      .cookie("token", token, {
+        maxAge: EXPIRATION_IN_30_DAYS,
+        sameSite: "strict",
+        httpOnly: true,
+      })
+      .json({ success: true });
   } catch (err) {
     return next(err);
   }

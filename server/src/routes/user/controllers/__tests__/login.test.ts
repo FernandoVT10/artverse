@@ -56,7 +56,7 @@ describe("routes/user/controllers/login", () => {
       mockedGenerateJWT.mockReturnValueOnce(token);
     };
 
-    it("should call 'res.json' with the token", async () => {
+    it("should call 'res.cookie' with the token and 'res.json'", async () => {
       mockGetUserByEmailOrUsername();
       mockBcryptCompare();
 
@@ -65,7 +65,15 @@ describe("routes/user/controllers/login", () => {
 
       const { res } = await callController();
 
-      expect(res.json).toHaveBeenCalledWith(token);
+      expect(res.cookie).toHaveBeenCalledWith("token", token, {
+        maxAge: expect.any(Number),
+        sameSite: "strict",
+        httpOnly: true,
+      });
+
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+      });
     });
 
     describe("getUserByEmailOrUsername", () => {

@@ -29,7 +29,14 @@ describe("Integration POST /api/users/login", () => {
   const request = supertest(app);
   const requestAPI = () => request.post("/api/users/login");
 
-  it("should return a valid jsonwebtoken", async () => {
+  const getTokenFromCookies = (cookies: string[]): string => {
+    const cookie = cookies[0];
+    const token = cookie.split(";")[0];
+    const parsedToken = token.replace("token=", "");
+    return parsedToken;
+  };
+
+  it("should set cookie with a valid jsonwebtoken and return a success message", async () => {
     const res = await requestAPI()
       .send({
         usernameOrEmail: user.username,
@@ -37,7 +44,9 @@ describe("Integration POST /api/users/login", () => {
       })
       .expect(200);
 
-    const { body: token } = res;
+    expect(res.body.success).toBeTruthy();
+
+    const token = getTokenFromCookies(res.get("Set-Cookie"));
 
     expect(() => jwt.verify(token, JWT_SECRET_KEY)).not.toThrow();
   });
