@@ -1,5 +1,7 @@
-import { testExpressValidator } from "@test-utils/expressValidatorHelpers";
-import { ValidationChain } from "express-validator";
+import {
+  testExpressValidator,
+  testValidator,
+} from "@test-utils/expressValidatorHelpers";
 import { checkIfUserExists } from "../../repositories";
 
 import generateRandomText from "@test-utils/generateRandomText";
@@ -12,16 +14,6 @@ describe("routes/user/utils/validators", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-
-  const testValidator = async (
-    bodyData: any,
-    validator: ValidationChain,
-    error: string
-  ) => {
-    const errors = await testExpressValidator(bodyData, validator);
-
-    expect(errors).toContain(error);
-  };
 
   describe("username", () => {
     const testUsername = (username: any, error: string) =>

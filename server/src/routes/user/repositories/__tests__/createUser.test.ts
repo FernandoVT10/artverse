@@ -1,8 +1,8 @@
 import createUser from "../createUser";
 
-import User from "../../UserModel";
+import { User } from "@models";
 
-jest.mock("../../UserModel");
+jest.mock("@models");
 
 describe("routes/user/repositories/createUser", () => {
   const mockedUserCreate = jest.mocked(User.create);

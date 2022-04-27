@@ -6,9 +6,9 @@ import {
   checkByUsernameOrEmail,
 } from "../checkIfUserExists";
 
-import User from "../../UserModel";
+import { User } from "@models";
 
-jest.mock("../../UserModel");
+jest.mock("@models");
 
 describe("routes/user/repositories/checkIfUserExists", () => {
   const mockedCount = jest.mocked(User.count);

@@ -1,4 +1,4 @@
-import User from "../UserModel";
+import { User } from "@models";
 
 type Data = {
   username: string;

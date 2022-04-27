@@ -3,11 +3,11 @@ import bcrypt from "bcrypt";
 import { NextFunction, Request, Response, RequestHandler } from "express";
 import { password, usernameOrEmail } from "../utils/validators";
 import { ValidationError } from "@utils/errors";
+import { User } from "@models";
 
 import getUserByEmailOrUsername from "../repositories/getUserByEmailOrUsername";
 import checkValidation from "@middlewares/checkValidation";
 import generateJWT from "../utils/generateJWT";
-import User from "../UserModel";
 
 export function validate(): RequestHandler[] {
   return [usernameOrEmail(), password(), checkValidation()];

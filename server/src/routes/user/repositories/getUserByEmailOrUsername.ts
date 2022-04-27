@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import User from "../UserModel";
+import { User } from "@models";
 
 function getUserByEmailOrUsername(data: string): Promise<User | null> {
   return User.findOne({

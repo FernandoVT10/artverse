@@ -1,9 +1,9 @@
 import { Op } from "sequelize";
 import getUserByEmailOrUsername from "../getUserByEmailOrUsername";
 
-import User from "../../UserModel";
+import { User } from "@models";
 
-jest.mock("../../UserModel");
+jest.mock("@models");
 
 describe("routes/user/repositories/getUserByEmailOrUsername", () => {
   const mockedUserFindOne = jest.mocked(User.findOne);

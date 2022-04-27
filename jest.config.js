@@ -10,6 +10,7 @@ module.exports = {
         "^@utils/(.*)$": "<rootDir>/src/utils/$1",
         "^@middlewares/(.*)$": "<rootDir>/src/middlewares/$1",
         "^@app$": "<rootDir>/src/app.ts",
+        "^@models$": "<rootDir>/src/models.ts",
         "^@routes/(.*)$": "<rootDir>/src/routes/$1",
         "^@test-utils/factories/(.*)$": "<rootDir>/test/factories/$1",
         "^@test-utils/(.*)$": "<rootDir>/test/utils/$1"

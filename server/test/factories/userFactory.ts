@@ -1,4 +1,4 @@
-import User from "@routes/user/UserModel";
+import { User } from "@models";
 
 export const createUser = async (data?: Partial<User>): Promise<User> => {
   return await User.create({

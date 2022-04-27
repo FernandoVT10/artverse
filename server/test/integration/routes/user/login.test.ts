@@ -4,11 +4,11 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import supertest from "supertest";
 import app from "@app";
-import User from "@routes/user/UserModel";
 
 import { testPasswordField } from "./shared";
 import { createUser } from "@test-utils/factories/userFactory";
 import { JWT_SECRET_KEY } from "@config/constants";
+import { User } from "@models";
 
 describe("Integration POST /api/users/login", () => {
   let user: User;

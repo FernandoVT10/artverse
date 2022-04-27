@@ -20,3 +20,13 @@ export const testExpressValidator = async (
 
   return errors.array();
 };
+
+export const testValidator = async (
+  bodyData: any,
+  validator: ValidationChain,
+  error: string
+) => {
+  const errors = await testExpressValidator(bodyData, validator);
+
+  expect(errors).toContain(error);
+};

@@ -1,6 +1,6 @@
 import { Op, WhereOptions } from "sequelize";
 
-import User from "../UserModel";
+import { User } from "@models";
 
 async function checkUser(whereOptions: WhereOptions<User>): Promise<boolean> {
   const count = await User.count({

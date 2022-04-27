@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import supertest from "supertest";
 import app from "@app";
-import User from "@routes/user/UserModel";
+import { User } from "@models";
 
 import "@test-utils/setupDB";
 
