@@ -15,6 +15,7 @@ const nextHandle = nextApp.getRequestHandler();
   await nextApp.prepare();
 
   try {
+    await sequelize.sync();
     await sequelize.authenticate();
   } catch (err) {
     return logger.error(err);

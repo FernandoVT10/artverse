@@ -32,4 +32,6 @@ export const CLIENT_DIR = path.resolve(ROOT_DIR, "./client");
 // the path where our static files are
 export const PUBLIC_DIR = path.resolve(ROOT_DIR, "./public");
 
+export const IMAGES_DIR = path.resolve(PUBLIC_DIR, "./img/uploads/");
+
 export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "";
