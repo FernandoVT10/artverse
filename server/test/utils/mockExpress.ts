@@ -4,7 +4,7 @@ type Parameters = {
   bodyData?: { [key: string]: any };
 };
 
-type ExpressMocked = {
+export type ExpressMocked = {
   req: any;
   res: any;
   next: NextFunction;
