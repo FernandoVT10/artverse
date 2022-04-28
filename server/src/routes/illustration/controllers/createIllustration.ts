@@ -10,9 +10,10 @@ import { ValidationError } from "@utils/errors";
 import checkValidation from "@middlewares/checkValidation";
 import multerInstance from "../utils/multerInstance";
 import convertPathsToURL from "@utils/convertPathsToURL";
+import authorize from "@middlewares/authorize";
 
 export function middlewares(): RequestHandler[] {
-  return [multerInstance.single("image")];
+  return [authorize(true), multerInstance.single("image")];
 }
 
 export function validate(): RequestHandler[] {
@@ -44,7 +45,7 @@ export async function controller(
     const { title, description } = req.body;
 
     const createdIllustration = await createIllustration({
-      userId: 1,
+      userId: req.userId,
       title,
       description,
       images: convertedPaths as IllustrationImagesType,

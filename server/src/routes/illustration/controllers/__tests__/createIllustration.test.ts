@@ -26,6 +26,7 @@ describe("routes/illustration/controllers/createIllustration", () => {
   };
 
   const createdIllustration = "test" as any;
+  const userId = 1;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -47,6 +48,8 @@ describe("routes/illustration/controllers/createIllustration", () => {
     req.file = {
       path: "/foo/bar.webp",
     };
+
+    req.userId = userId;
 
     await controller(req, res, next);
 
@@ -84,7 +87,7 @@ describe("routes/illustration/controllers/createIllustration", () => {
     });
 
     expect(mockedCreateIllustration).toHaveBeenCalledWith({
-      userId: 1,
+      userId,
       title,
       description,
       images: convertPathsToURLResponse,
