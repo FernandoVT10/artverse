@@ -1,17 +1,21 @@
 import { ValidationError } from "@utils/errors";
-import { resizeImageFromPath } from "@utils/images";
+import { saveAndResizeMulterFileAsImage } from "@utils/images";
 import { createIllustration } from "../../repositories";
 import { controller } from "../createIllustration";
 
 import convertPathsToURL from "@utils/convertPathsToURL";
 import mockExpress from "@test-utils/mockExpress";
+import {
+  ILLUSTRATIONS_DESTINATION,
+  ILLUSTRATIONS_SIZES,
+} from "@routes/illustration/constants";
 
 jest.mock("../../repositories");
 jest.mock("@utils/images");
 jest.mock("@utils/convertPathsToURL");
 
 describe("routes/illustration/controllers/createIllustration", () => {
-  const mockedResizeImageFromPath = jest.mocked(resizeImageFromPath);
+  const mockedSaveAndResizeMFAI = jest.mocked(saveAndResizeMulterFileAsImage);
   const mockedConvertPathsToURL = jest.mocked(convertPathsToURL);
   const mockedCreateIllustration = jest.mocked(createIllustration);
 
@@ -31,9 +35,7 @@ describe("routes/illustration/controllers/createIllustration", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    mockedResizeImageFromPath.mockResolvedValueOnce(
-      resizeImageFromPathResponse
-    );
+    mockedSaveAndResizeMFAI.mockResolvedValueOnce(resizeImageFromPathResponse);
 
     mockedConvertPathsToURL.mockReturnValueOnce(convertPathsToURLResponse);
 
@@ -56,16 +58,14 @@ describe("routes/illustration/controllers/createIllustration", () => {
     return { req, res };
   };
 
-  it("should call resizeImageFromPath", async () => {
+  it("should call saveAndResizeMulterFileAsImage", async () => {
     const { req } = await callController();
 
-    expect(mockedResizeImageFromPath).toHaveBeenCalledWith(req.file.path, [
-      {
-        width: 250,
-        height: 250,
-        suffix: "thumbnail",
-      },
-    ]);
+    expect(mockedSaveAndResizeMFAI).toHaveBeenCalledWith(
+      req.file,
+      ILLUSTRATIONS_DESTINATION,
+      ILLUSTRATIONS_SIZES
+    );
   });
 
   it("should call convertPathsToURL with the imagesPaths", async () => {

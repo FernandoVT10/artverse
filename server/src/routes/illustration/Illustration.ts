@@ -7,6 +7,7 @@ import {
   DataTypes,
   ForeignKey,
   Sequelize,
+  NonAttribute,
 } from "sequelize";
 
 import { User } from "@routes/user/User";
@@ -42,6 +43,8 @@ export class Illustration extends Model<
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+
+  declare images?: NonAttribute<IllustrationImages>;
 
   declare static associations: {
     images: Association<Illustration, IllustrationImages>;
@@ -84,6 +87,7 @@ export default {
       },
       {
         sequelize,
+        timestamps: false,
         tableName: "illustrations_images",
       }
     );

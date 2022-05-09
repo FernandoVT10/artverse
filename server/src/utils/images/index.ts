@@ -1,1 +1,1 @@
-export { default as resizeImageFromPath } from "./resizeImageFromPath";
+export { default as saveAndResizeMulterFileAsImage } from "./saveAndResizeMulterFileAsImage";

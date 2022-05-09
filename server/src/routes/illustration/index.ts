@@ -6,7 +6,6 @@ const router = Router();
 router.post(
   "/illustrations/",
   createIllustration.middlewares(),
-  createIllustration.validate(),
   createIllustration.controller
 );
 
