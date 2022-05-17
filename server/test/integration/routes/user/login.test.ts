@@ -1,11 +1,10 @@
-import "@test-utils/setupDB";
-
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import supertest from "supertest";
 import app from "@app";
 
 import { testPasswordField } from "./shared";
+import { clearDB } from "@test-utils/setupDB";
 import { createUser } from "@test-utils/factories/userFactory";
 import { JWT_SECRET_KEY } from "@config/constants";
 import { User } from "@models";
@@ -17,7 +16,7 @@ describe("Integration POST /api/users/login", () => {
   const plainPassword = "secret";
 
   beforeEach(async () => {
-    await User.sync({ force: true });
+    await clearDB();
 
     const hashedPassword = await bcrypt.hash(plainPassword, 1);
     user = await createUser({

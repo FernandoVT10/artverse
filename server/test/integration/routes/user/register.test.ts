@@ -1,15 +1,15 @@
 import bcrypt from "bcrypt";
 import supertest from "supertest";
 import app from "@app";
-import { User } from "@models";
 
-import "@test-utils/setupDB";
+import { User } from "@models";
+import { clearDB } from "@test-utils/setupDB";
 
 import { testUsernameField, testEmailField, testPasswordField } from "./shared";
 
 describe("Integration POST /api/users/register", () => {
   beforeEach(async () => {
-    await User.sync({ force: true });
+    await clearDB();
   });
 
   const requestData = {
