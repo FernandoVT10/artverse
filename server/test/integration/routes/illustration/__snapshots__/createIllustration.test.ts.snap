@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Integration POST /api/illustrations/ authorization should return an error when the token is invalid 1`] = `
+Array [
+  Object {
+    "message": "The credentials are invalid",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ authorization should return an error when the userId of the token doesn't exist 1`] = `
+Array [
+  Object {
+    "message": "There was an error trying to process your request. Please try again later.",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ authorization should return an error when you don't create a cookie with the token 1`] = `
+Array [
+  Object {
+    "message": "You don't have enough permissions",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation description should return an error when the description has more than 500 characters 1`] = `
+Array [
+  Object {
+    "field": "description",
+    "message": "The description must have 500 or less characters",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation description should return an error when the description is not a string 1`] = `
+Array [
+  Object {
+    "field": "description",
+    "message": "The description must be a string",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation description should return an error when the description is not provided 1`] = `
+Array [
+  Object {
+    "field": "description",
+    "message": "The description is required",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation image should return an error when the image is not attached 1`] = `
+Array [
+  Object {
+    "field": "image",
+    "message": "The image is required",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation image should return an error when you attach a file that's not an image 1`] = `
+Array [
+  Object {
+    "field": "image",
+    "message": "The field image must be an image",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation title should return an error when the title has more than 100 characters 1`] = `
+Array [
+  Object {
+    "field": "title",
+    "message": "The title must have 100 or less characters",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation title should return an error when the title is not a string 1`] = `
+Array [
+  Object {
+    "field": "title",
+    "message": "The title must be a string",
+  },
+]
+`;
+
+exports[`Integration POST /api/illustrations/ validation title should return an error when the title is not provided 1`] = `
+Array [
+  Object {
+    "field": "title",
+    "message": "The title is required",
+  },
+]
+`;

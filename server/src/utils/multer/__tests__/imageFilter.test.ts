@@ -1,6 +1,6 @@
 import imageFilter from "../imageFilter";
 
-import { ServerError } from "../../errors";
+import { ValidationError } from "../../errors";
 
 describe("utils/multer/imageFilter", () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe("utils/multer/imageFilter", () => {
   const callback = jest.fn();
 
   it("should call the callback with true when the file mimetype starts with 'image/'", () => {
-    const file = { mimetype: "image/png" } as any;
+    const file = { mimetype: "image/png", fieldname: "test" } as any;
 
     imageFilter(req, file, callback);
 
@@ -19,12 +19,12 @@ describe("utils/multer/imageFilter", () => {
   });
 
   it("should call the callback with an error when the file mimetype doesn't start with 'image/'", () => {
-    const file = { mimetype: "foo/bar" } as any;
+    const file = { mimetype: "foo/bar", fieldname: "test" } as any;
 
     imageFilter(req, file, callback);
 
     expect(callback).toHaveBeenCalledWith(
-      new ServerError("All files must be images")
+      new ValidationError("The field test must be an image", "test")
     );
   });
 });
