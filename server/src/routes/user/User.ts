@@ -8,7 +8,8 @@ import {
   Sequelize,
 } from "sequelize";
 
-import { Illustration } from "../illustration/Illustration";
+import { Illustration } from "@models";
+import { Like } from "@routes/illustration/models";
 
 export class User extends Model<
   InferAttributes<User>,
@@ -26,6 +27,7 @@ export class User extends Model<
 
   declare static associations: {
     illustrations: Association<User, Illustration>;
+    likes: Association<User, Like>;
   };
 }
 
@@ -64,8 +66,6 @@ export default {
         tableName: "users",
       }
     );
-
-    return User;
   },
 
   associate(models: Sequelize["models"]) {
@@ -77,7 +77,14 @@ export default {
       },
       onDelete: "CASCADE",
     });
+
+    User.hasMany(models.Like, {
+      as: "likes",
+      foreignKey: {
+        name: "userId",
+        allowNull: false,
+      },
+      onDelete: "CASCADE",
+    });
   },
 };
-
-// export default User;

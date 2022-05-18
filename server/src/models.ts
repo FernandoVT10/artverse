@@ -1,9 +1,9 @@
 import UserFactory from "./routes/user/User";
-import IllustrationFactory from "./routes/illustration/Illustration";
+import IllustrationFactories from "./routes/illustration/models";
 
 import { sequelize } from "./config/db";
 
-const modelsFactories = [UserFactory, IllustrationFactory];
+const modelsFactories = [UserFactory, ...IllustrationFactories];
 
 modelsFactories.forEach((model) => {
   model.init(sequelize);
@@ -14,4 +14,8 @@ modelsFactories.forEach((model) => {
 });
 
 export { User } from "./routes/user/User";
-export { Illustration } from "./routes/illustration/Illustration";
+export {
+  Illustration,
+  Like,
+  IllustrationImages,
+} from "./routes/illustration/models";

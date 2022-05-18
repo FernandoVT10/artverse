@@ -10,27 +10,10 @@ import {
   NonAttribute,
 } from "sequelize";
 
-import { User } from "@routes/user/User";
+import { IllustrationImages } from "./IllustrationImages";
 
-// this type has the values that are neccesary to create the IllustrationImages model
-export type IllustrationImagesType = {
-  thumbnail: string;
-  original: string;
-};
-
-class IllustrationImages extends Model<
-  InferAttributes<IllustrationImages>,
-  InferCreationAttributes<IllustrationImages>
-> {
-  declare id: CreationOptional<number>;
-  declare illustrationId: ForeignKey<Illustration["id"]>;
-  declare thumbnail: string;
-  declare original: string;
-
-  declare static associations: {
-    illustration: Association<IllustrationImages, Illustration>;
-  };
-}
+import { User } from "@models";
+import { Like } from "./Like";
 
 export class Illustration extends Model<
   InferAttributes<Illustration>,
@@ -49,6 +32,7 @@ export class Illustration extends Model<
   declare static associations: {
     images: Association<Illustration, IllustrationImages>;
     user: Association<Illustration, User>;
+    likes: Association<Illustration, Like>;
   };
 }
 
@@ -74,25 +58,6 @@ export default {
         tableName: "illustrations",
       }
     );
-
-    IllustrationImages.init(
-      {
-        id: {
-          type: DataTypes.INTEGER.UNSIGNED,
-          autoIncrement: true,
-          primaryKey: true,
-        },
-        thumbnail: DataTypes.STRING,
-        original: DataTypes.STRING,
-      },
-      {
-        sequelize,
-        timestamps: false,
-        tableName: "illustrations_images",
-      }
-    );
-
-    return Illustration;
   },
 
   associate(models: Sequelize["models"]) {
@@ -100,7 +65,7 @@ export default {
       as: "user",
     });
 
-    Illustration.hasOne(IllustrationImages, {
+    Illustration.hasOne(models.IllustrationImages, {
       as: "images",
       foreignKey: {
         name: "illustrationId",
@@ -109,10 +74,13 @@ export default {
       onDelete: "CASCADE",
     });
 
-    IllustrationImages.belongsTo(Illustration, {
-      as: "illustration",
+    Illustration.hasMany(models.Like, {
+      as: "likes",
+      foreignKey: {
+        name: "illustrationId",
+        allowNull: false,
+      },
+      onDelete: "CASCADE",
     });
   },
 };
-
-// export default Illustration;

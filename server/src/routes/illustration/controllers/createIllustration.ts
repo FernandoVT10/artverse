@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction, RequestHandler } from "express";
 import * as validators from "../utils/validators";
 
 import { BaseError as SequelizeError } from "sequelize";
-import { IllustrationImagesType } from "../Illustration";
+import { IllustrationImagesType } from "../models/IllustrationImages";
 import { createIllustration } from "../repositories";
 import { saveAndResizeMulterFileAsImage } from "@utils/images";
 import { ValidationError } from "@utils/errors";
