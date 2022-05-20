@@ -1,3 +1,5 @@
+import LoggerHandler from "@utils/LoggerHandler";
+
 import type { ErrorRequestHandler } from "express";
 
 import { ServerError, ValidationError } from "@utils/errors";
@@ -19,6 +21,8 @@ export default function errorHandler(): ErrorRequestHandler {
 
       errors.push({ message });
     } else {
+      LoggerHandler.logError(err);
+
       errors.push({
         message: DEFAULT_ERROR_MESSAGE,
       });

@@ -1,7 +1,10 @@
+import LoggerHandler from "@utils/LoggerHandler";
 import errorHandler from "../errorHandler";
 import mockExpress from "@test-utils/mockExpress";
 
 import { ServerError, ValidationError } from "@utils/errors";
+
+jest.mock("@utils/LoggerHandler");
 
 describe("middlewares/checkValidation", () => {
   const callErrorHandler = (error: any = null) => {
@@ -23,6 +26,14 @@ describe("middlewares/checkValidation", () => {
     const { res } = callErrorHandler();
     const { errors } = res.json.mock.calls[0][0];
     expect(errors).toMatchSnapshot();
+  });
+
+  it("should call 'logError' with the error when the error is neither ServerError nor ValidationError", () => {
+    const error = new Error();
+    callErrorHandler(error);
+
+    const logErrorMocked = jest.mocked(LoggerHandler.logError);
+    expect(logErrorMocked).toHaveBeenCalledWith(error);
   });
 
   describe("ServerError instance", () => {
